@@ -1,0 +1,152 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace College_Admssions_Tracker
+{
+    public partial class frmCollege : Form
+    {
+        public frmCollege()
+        {
+            InitializeComponent();
+        }
+
+        private void ButtonCalculate_Click(object sender, EventArgs e)
+        {
+            Double GPA;
+            int ACT, SAT, Hon, DA, EC, EQ, score;
+            Boolean NULL;
+            GPA = Convert.ToDouble(txtGPA.Text);
+            ACT = Convert.ToInt32(txtACT.Text);
+            SAT = Convert.ToInt32(txtSAT.Text);
+            Hon = Convert.ToInt32(txtHonors.Text);
+            DA = Convert.ToInt32(txtDisciplinary.Text);
+            EC = Convert.ToInt32(mtxtEC.Text);
+            EQ = Convert.ToInt32(mtxtEssay.Text);
+            score = 0;
+            NULL = false;
+            if (GPA > 3.5)
+            {
+                score += 500;
+            }
+            else if (GPA > 3.0)
+            {
+                score += 300;
+            }
+            else if (GPA > 2.5)
+            {
+                score += 100;
+            }
+            else if (GPA < 1.5)
+            {
+                NULL = true;
+            }
+
+
+            if (ACT > 32)
+            {
+                score += 300;
+            }
+            else if (ACT > 26)
+            {
+                score += 100;
+            }
+            else if (ACT < 12)
+            {
+                NULL = true;
+            }
+
+            if (SAT > 1450)
+            {
+                score += 400;
+            }
+            else if (SAT > 1250)
+            {
+                score += 200;
+            }
+            else if (SAT > 1050)
+            {
+                score += 100;
+            }
+            else if (SAT < 550)
+            {
+                NULL = true;
+            }
+
+
+            if (Hon > 20)
+            {
+                score += 600;
+            }
+            else
+            {
+                score += Hon * 20;
+            }
+
+
+            if (DA > 5)
+            {
+                NULL = true;
+            }
+            else
+            {
+                score -= DA * 100;
+            }
+
+
+            if (EC < 3)
+            {
+                NULL = true;
+            }
+            else
+            {
+                score += EC * 100;
+            }
+
+            if (EQ == 1)
+            {
+                NULL = true;
+            }
+            else
+            {
+                score += EQ * 100;
+            }
+
+            if (NULL == true)
+            {
+                MessageBox.Show("You fail to meet the requirements of our college.");
+            }
+            else
+            {
+            
+                if (score >= 3000)
+                {
+                   MessageBox.Show("You will very likely to get in.");
+                }
+                else if (score < 3000 && score >= 2500)
+                {
+                    MessageBox.Show("You will likely get in.");
+                }
+                else if (score < 2500 && score >= 1800)
+                {
+                    MessageBox.Show("You could get in.");
+                }
+                else if (score < 1800 && score > 1000)
+                {
+                    MessageBox.Show("You will probably not get in");
+                }
+                else if (score < 1000)
+                {
+                    MessageBox.Show("You have a minimal chance of getting in.");
+                }
+             
+            }
+        }
+    }
+}
